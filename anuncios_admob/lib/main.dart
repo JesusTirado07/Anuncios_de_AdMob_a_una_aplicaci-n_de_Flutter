@@ -37,6 +37,7 @@ void main() async {
         colorScheme:
             ColorScheme.fromSwatch().copyWith(secondary: AppTheme.accent),
       ),
+      debugShowCheckedModeBanner: false,
     ),
   );
 }
