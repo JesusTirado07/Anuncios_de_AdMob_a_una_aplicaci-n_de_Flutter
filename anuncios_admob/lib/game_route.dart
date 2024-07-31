@@ -14,13 +14,10 @@ class GameRoute extends StatefulWidget {
 }
 
 class _GameRouteState extends State<GameRoute> implements QuizEventListener {
-  // COMPLETE: Add _bannerAd
   BannerAd? _bannerAd;
 
-  // COMPLETE: Add _interstitialAd
   InterstitialAd? _interstitialAd;
 
-  // COMPLETE: Add _rewardedAd
   RewardedAd? _rewardedAd;
 
   @override
@@ -31,7 +28,6 @@ class _GameRouteState extends State<GameRoute> implements QuizEventListener {
       ..listener = this
       ..startGame();
 
-    // COMPLETE: Load a banner ad
     BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
       request: const AdRequest(),
@@ -49,7 +45,6 @@ class _GameRouteState extends State<GameRoute> implements QuizEventListener {
       ),
     ).load();
 
-    // COMPLETE: Load a rewarded Ad
     _loadRewardedAd();
   }
 
@@ -141,7 +136,6 @@ class _GameRouteState extends State<GameRoute> implements QuizEventListener {
                 ],
               ),
             ),
-            // COMPLETE: Display a banner when ready
             if (_bannerAd != null)
               Align(
                 alignment: Alignment.topCenter,
@@ -173,7 +167,6 @@ class _GameRouteState extends State<GameRoute> implements QuizEventListener {
   }
 
   Widget? _buildFloatingActionButton() {
-    // COMPLETE: Return a FloatingActionButton if a Rewarded Ad is available
     return (!QuizManager.instance.isHintUsed && _rewardedAd != null)
         ? FloatingActionButton.extended(
             onPressed: () {
@@ -224,7 +217,6 @@ class _GameRouteState extends State<GameRoute> implements QuizEventListener {
     );
   }
 
-  // COMPLETE: Implement _loadInterstitialAd()
   void _loadInterstitialAd() {
     InterstitialAd.load(
       adUnitId: AdHelper.interstitialAdUnitId,
@@ -248,7 +240,6 @@ class _GameRouteState extends State<GameRoute> implements QuizEventListener {
     );
   }
 
-  // COMPLETE: Implement _loadRewardedAd()
   void _loadRewardedAd() {
     RewardedAd.load(
       adUnitId: AdHelper.rewardedAdUnitId,
@@ -278,13 +269,10 @@ class _GameRouteState extends State<GameRoute> implements QuizEventListener {
 
   @override
   void dispose() {
-    // COMPLETE: Dispose a BannerAd object
     _bannerAd?.dispose();
 
-    // COMPLETE: Dispose an InterstitialAd object
     _interstitialAd?.dispose();
 
-    // COMPLETE: Dispose a RewardedAd object
     _rewardedAd?.dispose();
 
     QuizManager.instance.listener = null;
@@ -301,7 +289,6 @@ class _GameRouteState extends State<GameRoute> implements QuizEventListener {
   void onNewLevel(int level, Drawing drawing, String clue) {
     setState(() {});
 
-    // COMPLETE: Load an Interstitial Ad
     if (level >= 3 && _interstitialAd == null) {
       _loadInterstitialAd();
     }
@@ -324,7 +311,6 @@ class _GameRouteState extends State<GameRoute> implements QuizEventListener {
             TextButton(
               child: Text('close'.toUpperCase()),
               onPressed: () {
-                // COMPLETE: Display an Interstitial Ad
                 if (_interstitialAd != null) {
                   _interstitialAd?.show();
                 } else {

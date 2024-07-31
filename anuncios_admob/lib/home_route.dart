@@ -64,7 +64,6 @@ class HomeRoute extends StatelessWidget {
   }
 
   Future<InitializationStatus> _initGoogleMobileAds() {
-    // TODO: Initialize Google Mobile Ads SDK
     return MobileAds.instance.initialize();
   }
 }
